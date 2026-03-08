@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dqrcnh1kt7bml"]
+
+[ext_resource type="Script" uid="uid://d3mawc45msp41" path="res://Scenes/game.gd" id="1_ebmjs"]
+
+[node name="Game" type="Control" unique_id=1241791264]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ebmjs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=395569597]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -39.5
+offset_right = 58.0
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.3200002, 2.28)
+
+[node name="Option 1" type="Button" parent="VBoxContainer" unique_id=1979085931]
+layout_mode = 2
+
+[node name="Option 2" type="Button" parent="VBoxContainer" unique_id=693825957]
+layout_mode = 2
+
+[node name="Option 3" type="Button" parent="VBoxContainer" unique_id=278787442]
+layout_mode = 2
+
+[node name="Option 4" type="Button" parent="VBoxContainer" unique_id=911702226]
+layout_mode = 2
+
+[node name="Skip" type="Button" parent="VBoxContainer" unique_id=362206659]
+layout_mode = 2
+text = "Skip Question"
+
+[node name="Label" type="Label" parent="." unique_id=510183448]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -136.0
+offset_right = 36.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Question"
+
+[node name="Label2" type="Label" parent="." unique_id=2118293874]
+layout_mode = 0
+offset_left = 609.0
+offset_top = 473.0
+offset_right = 680.0
+offset_bottom = 496.0
+
+[connection signal="pressed" from="VBoxContainer/Option 1" to="." method="_on_option_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Option 2" to="." method="_on_option_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Option 3" to="." method="_on_option_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Option 4" to="." method="_on_option_4_pressed"]
+[connection signal="pressed" from="VBoxContainer/Skip" to="." method="_on_skip_pressed"]
