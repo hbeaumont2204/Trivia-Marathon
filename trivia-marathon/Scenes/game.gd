@@ -9,7 +9,7 @@ var buttons = ""
 
 var question_pack = ""
 var correct_answer = ""
-var file_path = "res://quiz.csv"
+var file_path = "res://Assets/Quiz_Packs/quiz_test.csv"
 
 var score = 0 # Player Score
 
@@ -29,7 +29,9 @@ func load_question_pack(file_path: String):
 	
 	if not file:
 		print("Error finding file", file_path)
-		get_tree().quit() # Ends game if file not found
+		label.text = "Quiz pack not found"
+		#get_tree().quit() # Ends game if file not found
+		return
 	return file
 
 
