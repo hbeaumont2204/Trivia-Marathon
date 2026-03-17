@@ -9,7 +9,7 @@ var buttons = ""
 
 var question_pack = ""
 var correct_answer = ""
-var file_path = "res://Assets/Quiz_Packs/quiz_test.csv"
+var file_path = "res://Assets/Quiz_Packs/quiz_pack_1.csv"
 
 var score = 0 # Player Score
 
