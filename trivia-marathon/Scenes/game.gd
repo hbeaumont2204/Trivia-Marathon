@@ -21,7 +21,21 @@ var score = 0 # Player Score
 func _ready() -> void:
 	buttons = button_container.get_children()
 	question_pack = load_question_pack(file_path)
-	load_question(question_pack)	
+	load_question(question_pack)
+
+func _process(delta):
+	if Input.is_action_just_pressed("option1"):
+		check_answer(option_1,correct_answer)
+	if Input.is_action_just_pressed("option2"):
+		check_answer(option_2,correct_answer)
+	if Input.is_action_just_pressed("option3"):
+		check_answer(option_3,correct_answer)
+	if Input.is_action_just_pressed("option4"):
+		check_answer(option_4,correct_answer)
+	if Input.is_action_just_pressed("skip"):
+		skip_question()
+
+
 
 
 func load_question_pack(file_path: String):
@@ -66,6 +80,8 @@ func check_answer(selected_answer,correct_answer):
 
 func skip_question():
 	answerLabel.text = "Skipped"
+	await get_tree().create_timer(5).timeout
+	load_question(question_pack)
 
 
 func _on_option_1_pressed() -> void:
