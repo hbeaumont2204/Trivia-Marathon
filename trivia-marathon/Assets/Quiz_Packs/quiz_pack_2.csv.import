@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://yoex5ksd1808"
+
+[deps]
+
+files=["res://Assets/Quiz_Packs/quiz_pack_2.Charlotte Bronte.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Jane Austen.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Emily Dickinson.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Mary Shelley.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Jane Austen.translation"]
+
+source_file="res://Assets/Quiz_Packs/quiz_pack_2.csv"
+dest_files=["res://Assets/Quiz_Packs/quiz_pack_2.Charlotte Bronte.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Jane Austen.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Emily Dickinson.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Mary Shelley.translation", "res://Assets/Quiz_Packs/quiz_pack_2.Jane Austen.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
