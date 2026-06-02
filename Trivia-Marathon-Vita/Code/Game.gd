@@ -1,6 +1,5 @@
 extends Control
 
-
 var question = ""
 var option_1 = ""
 var option_2 = ""
@@ -11,7 +10,7 @@ var buttons = ""
 var question_pack = ""
 var correct_answer = ""
 #var file_path = "res://Assets/quiz_pack_2.csv"
-var file_path = "res://Assets/quiz_test.csv"
+var file_path = "res://Assets/quiz_test.csv" # Test
 var questionActive = true
 
 var score = 0 # Player Score
@@ -66,7 +65,7 @@ func load_question_pack(file_path: String):
 
 
 func load_question(file):
-	if file.eof_reached():
+	if file.eof_reached() || score < 0: # End game when out of questions or score goes negative
 		end_game()
 		return
 		
@@ -96,16 +95,16 @@ func check_answer(selected_answer,correct_answer):
 	if questionActive:
 		questionActive = false
 		if selected_answer == correct_answer:
-			answerLabel.text = "Correct Answer"
-			yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
+			answerLabel.text = "Correct Answer +10 points"
 			score += 10
 			update_score()
+			yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
 			load_question(question_pack)
 		else:
-			answerLabel.text = "Wrong answer"
-			yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
+			answerLabel.text = "Incorrect answer -5 points"
 			score -= 5
 			update_score()
+			yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
 			load_question(question_pack)
 
 
