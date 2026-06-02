@@ -10,7 +10,8 @@ var buttons = ""
 
 var question_pack = ""
 var correct_answer = ""
-var file_path = "res://Assets/quiz_pack_2.csv"
+#var file_path = "res://Assets/quiz_pack_2.csv"
+var file_path = "res://Assets/quiz_test.csv"
 var questionActive = true
 
 var score = 0 # Player Score
@@ -67,7 +68,14 @@ func load_question_pack(file_path: String):
 func load_question(file):
 	if file.eof_reached():
 		end_game()
+		return
+		
 	var current_line = file.get_csv_line()
+	
+	if current_line.size() < 6 or current_line[0] == "":
+		end_game()
+		return
+		
 	answerLabel.text = "" # Reset/Initialise answer label
 	#print(current_line)
 	label.text = current_line[0] # Display question
@@ -115,8 +123,9 @@ func no_answer():
 	load_question(question_pack)
 	
 func end_game():
-	question_pack.close()
-	get_tree().change_scene("res://End_Menu.tscn")
+	if question_pack:
+		question_pack.close()
+	get_tree().change_scene("res://Scenes/End_Menu.tscn")
 
 
 func _on_Option1_pressed():
