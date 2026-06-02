@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Code/Main_Menu.gd" type="Script" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
 
 [node name="Main Menu" type="Control"]
 anchor_right = 1.0
@@ -36,6 +38,29 @@ margin_top = 48.0
 margin_right = 80.0
 margin_bottom = 68.0
 text = "Exit Game"
+
+[node name="ScoreContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 103.0
+margin_right = 384.0
+margin_bottom = 244.0
+alignment = 1
+
+[node name="HighScore" type="Label" parent="ScoreContainer"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 1 )
+margin_top = 54.0
+margin_right = 376.0
+margin_bottom = 68.0
+text = "High Score:"
+
+[node name="PreviousScore" type="Label" parent="ScoreContainer"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 1 )
+margin_top = 72.0
+margin_right = 376.0
+margin_bottom = 86.0
+text = "Previous Score:"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]

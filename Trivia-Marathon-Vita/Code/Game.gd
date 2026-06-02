@@ -124,7 +124,32 @@ func no_answer():
 func end_game():
 	if question_pack:
 		question_pack.close()
-	get_tree().change_scene("res://Scenes/End_Menu.tscn")
+		print("Question pack closed")
+
+	# Save score
+	var high_score = 0 # Default if player is on first game
+	var dir = Directory.new()
+	var file = File.new()
+	if file.open_encrypted_with_pass("user://previous_score.dat",File.WRITE,"12345") == OK:
+		print("Saved score")
+		file.store_var(score)
+		file.close()
+		
+	if dir.file_exists("user://high_score.dat"): # Compare latest score with highscore
+		if file.open_encrypted_with_pass("user://high_score.dat",File.READ,"12345") == OK:
+			high_score = file.get_var()
+			print(high_score)
+			file.close()
+		if score > high_score:
+			if file.open_encrypted_with_pass("user://high_score.dat",File.WRITE,"12345") == OK:
+				file.store_var(score)
+				file.close()
+				print("High Score saved successfully")
+	else: # Always write score as highscore if none detected
+		if file.open_encrypted_with_pass("user://high_score.dat",File.WRITE,"12345") == OK:
+				file.store_var(score)
+				file.close()
+	get_tree().change_scene("res://Scenes/Main_Menu.tscn")
 
 
 func _on_Option1_pressed():
