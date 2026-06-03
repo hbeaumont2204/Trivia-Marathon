@@ -9,8 +9,7 @@ var buttons = ""
 
 var question_pack = ""
 var correct_answer = ""
-#var file_path = "res://Assets/quiz_pack_2.csv"
-var file_path = "res://Assets/quiz_test.csv" # Test
+var file_path = "res://Assets/quiz_pack_2.csv"
 var questionActive = true
 
 var score = 0 # Player Score
@@ -20,9 +19,13 @@ onready var button_container = $CenterContainer/VBoxContainer
 onready var label = $Question
 onready var answerLabel = $CenterContainer/VBoxContainer/Result
 onready var pointsLabel = $Points
+onready var timer_label = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Test values
+	file_path = "res://Assets/quiz_test.csv" # Test
+	
 	buttons = button_container.get_children()
 	question_pack = load_question_pack(file_path)
 	load_question(question_pack)
@@ -44,7 +47,12 @@ func _process(delta):
 	if Input.is_action_just_pressed("skip"):
 		skip_question()
 	#pointsLabel.text = "Points: " + str(score)
-	timer -= delta
+	
+	if questionActive:
+		timer -= delta
+		timer_label.text = "Time: " + str(int(timer))
+		if timer <= 0:
+			no_answer()
 	
 func update_score():
 	pointsLabel.text = "Points: " + str(score)
@@ -75,6 +83,7 @@ func load_question(file):
 		end_game()
 		return
 		
+	timer = 30.0 # Reset timer
 	answerLabel.text = "" # Reset/Initialise answer label
 	#print(current_line)
 	label.text = current_line[0] # Display question
@@ -151,6 +160,7 @@ func end_game():
 				file.close()
 	get_tree().change_scene("res://Scenes/Main_Menu.tscn")
 
+# Button functions
 
 func _on_Option1_pressed():
 	check_answer(option_1,correct_answer)
