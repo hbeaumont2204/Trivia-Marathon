@@ -78,7 +78,9 @@ margin_top = 192.0
 margin_right = 250.0
 margin_bottom = 252.0
 rect_min_size = Vector2( 200, 60 )
+text = "Result"
 align = 1
+valign = 1
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/True" to="." method="_on_Option1_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/False" to="." method="_on_Option2_pressed"]
