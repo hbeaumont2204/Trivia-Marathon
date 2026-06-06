@@ -88,11 +88,8 @@ Multiple Choice
 align = 1
 
 [node name="GameModeButton" type="Button" parent="OptionsContainer"]
-anchor_left = 0.25
-anchor_right = 0.25
-margin_left = -4.0
 margin_top = 70.0
-margin_right = 196.0
+margin_right = 376.0
 margin_bottom = 90.0
 text = "True or False"
 
