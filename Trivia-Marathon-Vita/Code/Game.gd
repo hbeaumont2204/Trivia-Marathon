@@ -28,8 +28,10 @@ func _ready() -> void:
 	
 	buttons = button_container.get_children()
 	question_pack = load_question_pack(file_path)
-	load_question(question_pack)
-	update_score()
+	#question_pack.open(file_path, File.READ)
+	if question_pack:
+		load_question(question_pack)
+		update_score()
 
 func _process(delta):
 	if Input.is_action_just_pressed("option1"):
@@ -60,15 +62,19 @@ func update_score():
 
 func load_question_pack(file_path: String):
 	#var file = FileAccess.open(file_path, FileAccess.READ)
-	
 	var file = File.new()
 	file.open(file_path, File.READ)
 	
-	if not file:
-		print("Error finding file", file_path)
-		label.text = "Quiz pack not found"
-		#get_tree().quit() # Ends game if file not found
-		return
+	var err = file.open(file_path, File.READ)
+	if err != OK:
+		print("Failed to open: ", file_path, " Error: ", err)
+		return null
+	
+	#if not file:
+	#	print("Error finding file", file_path)
+	#	label.text = "Quiz pack not found"
+	#	#get_tree().quit() # Ends game if file not found
+	#	return
 	return file
 
 
