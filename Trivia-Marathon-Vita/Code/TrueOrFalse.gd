@@ -5,11 +5,11 @@ var buttons = ""
 
 var question_pack = ""
 var is_true = ""
-var file_path = ""
+var file_path = "res://Assets/quiz_history_tf.csv"
 var correct_answer = ""
 var question_active = true
 
-var score = 0
+var score = 10
 var timer = 30.0
 
 onready var button_container = $CenterContainer/VBoxContainer
@@ -20,13 +20,11 @@ onready var timer_label = $Timer
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	file_path = "res://Assets/--.csv"
-	
+func _ready():	
 	buttons = button_container.get_children()
-	#question_pack = load_question_pack(file_path)
-	#load_question(question_pack)
-	#update_score()
+	question_pack = load_question_pack(file_path)
+	load_question(question_pack)
+	update_score()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,6 +44,7 @@ func _process(delta):
 func update_score():
 	points_label.text = "Points: " + str(score)
 
+
 func load_question_pack(file_path: String):
 	#var file = FileAccess.open(file_path, FileAccess.READ)
 	
@@ -58,16 +57,19 @@ func load_question_pack(file_path: String):
 		#get_tree().quit() # Ends game if file not found
 		return
 	return file
-	
+
+
 func load_question(file):
 	if file.eof_reached() || score < 0:
-		#end_game()
+		end_game()
 		return
 	
 	var current_line = file.get_csv_line()
 	
-	if current_line.size() < 6 or current_line[0] == "":
-		#end_game()
+	print(current_line.size())
+	print(current_line[0])
+	if current_line.size() < 2 or current_line[0] == "":
+		end_game()
 		return
 	
 	timer = 30.0
@@ -80,10 +82,12 @@ func load_question(file):
 	
 	question_active = true
 
+
 func check_answer(selected_answer, correct_answer):
+	print(str(selected_answer))
 	if question_active:
 		question_active = false
-		if selected_answer == correct_answer:
+		if str(selected_answer) == correct_answer:
 			answer_label.text = "Correct Answer +10 points"
 			score += 10
 			update_score()
@@ -95,14 +99,16 @@ func check_answer(selected_answer, correct_answer):
 			update_score()
 			yield(get_tree().create_timer(5.0), "timeout")
 			load_question(question_pack)
-			
+
+
 func skip_question():
 	if question_active:
 		question_active = false
 		answer_label.text = "Question skipped"
 		yield(get_tree().create_timer(5.0), "timeout")
 		load_question(question_pack)
-		
+
+
 func end_game():
 	if question_pack:
 		question_pack.close()
@@ -125,7 +131,8 @@ func save_score(f,file_path,score):
 	if f.open_encrypted_with_pass(file_path,File.WRITE,"12345") == OK:
 		f.store_var(score)
 		f.close()
-	
+
+
 func read_score(d,f,file_path):
 	var high_score = 0 # Default val if first game
 	if d.file_exists(file_path):
@@ -134,7 +141,8 @@ func read_score(d,f,file_path):
 			print(high_score)
 			f.close()
 	return high_score
-	
+
+
 # Button functions
 
 func _on_True_pressed():

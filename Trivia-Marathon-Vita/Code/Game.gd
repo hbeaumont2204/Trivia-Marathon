@@ -12,7 +12,7 @@ var correct_answer = ""
 var file_path = "res://Assets/quiz_pack_2.csv"
 var questionActive = true
 
-var score = 0 # Player Score
+var score = 10 # Player Score
 var timer = 30.0
 
 onready var button_container = $CenterContainer/VBoxContainer
@@ -24,7 +24,7 @@ onready var timer_label = $Timer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Test values
-	file_path = "res://Assets/quiz_test.csv" # Test
+	#file_path = "res://Assets/quiz_test.csv" # Test
 	
 	buttons = button_container.get_children()
 	question_pack = load_question_pack(file_path)

@@ -2,12 +2,15 @@ extends Control
 
 onready var high_score_label = $ScoreContainer/HighScore
 onready var previous_score_label = $ScoreContainer/PreviousScore
+onready var game_mode_button = $OptionsContainer/GameModeButton
 
 var high_score_path = "user://high_score.dat"
 var previous_score_path = "user://previous_score.dat"
 
 var high_score
 var previous_score
+
+var game_mode_tf = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,7 +49,10 @@ func init_score(var file_path):
 # Button functions
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://Scenes/Game.tscn")
+	if game_mode_tf:
+		get_tree().change_scene("res://Scenes/TrueOrFalse.tscn")
+	else:
+		get_tree().change_scene("res://Scenes/Game.tscn")
 
 
 func _on_OptionButton_pressed():
@@ -55,3 +61,12 @@ func _on_OptionButton_pressed():
 
 func _on_ExitButton_pressed():
 	get_tree().quit()
+
+
+func _on_GameModeButton_pressed():
+	if game_mode_tf:
+		game_mode_tf = false
+		game_mode_button.text = "True or False"
+	else:
+		game_mode_tf = true
+		game_mode_button.text = "Multiple choice"

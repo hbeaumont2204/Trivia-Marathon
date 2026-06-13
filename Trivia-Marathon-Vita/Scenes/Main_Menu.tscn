@@ -81,19 +81,17 @@ valign = 1
 modulate = Color( 0, 0, 0, 1 )
 margin_top = 18.0
 margin_right = 376.0
-margin_bottom = 66.0
-text = "
-Multiple Choice
-"
+margin_bottom = 32.0
 align = 1
 
 [node name="GameModeButton" type="Button" parent="OptionsContainer"]
-margin_top = 70.0
+margin_top = 36.0
 margin_right = 376.0
-margin_bottom = 90.0
+margin_bottom = 56.0
 text = "True or False"
 
 [node name="Label2" type="Label" parent="OptionsContainer"]
+visible = false
 modulate = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 margin_top = 94.0
 margin_right = 376.0
@@ -106,3 +104,4 @@ align = 1
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="OptionsContainer/GameModeButton" to="." method="_on_GameModeButton_pressed"]
