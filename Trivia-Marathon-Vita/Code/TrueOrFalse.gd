@@ -29,6 +29,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		end_game()
 	if Input.is_action_pressed("option1"):
 		check_answer(true, correct_answer)
 	if Input.is_action_just_pressed("option2"):
@@ -39,7 +41,7 @@ func _process(delta):
 		timer -= delta
 		timer_label.text = "Time: " + str(int(timer))
 		if timer <= 0:
-			pass
+			skip_question()
 
 func update_score():
 	points_label.text = "Points: " + str(score)
@@ -155,3 +157,5 @@ func _on_False_pressed():
 
 func _on_Skip_pressed():
 	skip_question()
+
+

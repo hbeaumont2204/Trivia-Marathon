@@ -10,6 +10,7 @@ var buttons = ""
 var question_pack = ""
 var correct_answer = ""
 var file_path = "res://Assets/quiz_pack_2.csv"
+var file_paths = ["res://Assets/quiz_pack_2.csv", "res://Assets/quiz_pack_1.csv"]
 var questionActive = true
 
 var score = 10 # Player Score
@@ -34,6 +35,8 @@ func _ready() -> void:
 		update_score()
 
 func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		end_game()
 	if Input.is_action_just_pressed("option1"):
 		#questionActive = false
 		check_answer(option_1,correct_answer)
@@ -186,3 +189,5 @@ func _on_Option4_pressed():
 
 func _on_Skip_pressed():
 	skip_question()
+
+

@@ -2,6 +2,7 @@ extends Control
 
 onready var high_score_label = $ScoreContainer/HighScore
 onready var previous_score_label = $ScoreContainer/PreviousScore
+onready var options = $OptionsContainer
 onready var game_mode_button = $OptionsContainer/GameModeButton
 
 var high_score_path = "user://high_score.dat"
@@ -14,6 +15,7 @@ var game_mode_tf = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	options.visible = false
 	high_score = read_score(high_score_path)
 	previous_score = read_score(previous_score_path)
 	
@@ -56,7 +58,7 @@ func _on_PlayButton_pressed():
 
 
 func _on_OptionButton_pressed():
-	pass # Replace with function body.
+	options.visible = !options.visible
 
 
 func _on_ExitButton_pressed():
