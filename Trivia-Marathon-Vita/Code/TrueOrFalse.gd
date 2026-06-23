@@ -10,6 +10,11 @@ var file_path = "res://Assets/quiz_history_tf.csv"
 # NEW
 var question_number = 1
 var file_paths = ["res://Assets/quiz_history_tf.csv", "res://Assets/tf_pack_1.csv"]
+var files = []
+var question_num = 1 # 
+var questions = []
+var answers = []
+var rng = RandomNumberGenerator.new()
 
 var correct_answer = ""
 var question_active = true
@@ -27,8 +32,23 @@ onready var timer_label = $Timer
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	buttons = button_container.get_children()
-	question_pack = load_question_pack(file_path)
-	load_question(question_pack)
+	#question_pack = load_question_pack(file_path)
+	#load_question(question_pack)
+	
+	
+	for pack in file_paths:
+		question_pack = load_question_pack(pack)
+		if question_pack:
+			files.append(question_pack)
+			
+	for file in files:
+		while !(file.eof_reached()):
+			var current_line = file.get_csv_line()
+			if current_line.size() >= 2 or current_line[0] != "":
+				questions.append(current_line[0])
+				answers.append(current_line[1])
+	
+	load_question_new()
 	update_score()
 
 
@@ -39,7 +59,7 @@ func _process(delta):
 	if Input.is_action_pressed("option1"):
 		check_answer(true, correct_answer)
 	if Input.is_action_just_pressed("option2"):
-		check_answer(true, correct_answer)
+		check_answer(false, correct_answer)
 	if Input.is_action_just_pressed("skip"):
 		skip_question()
 	if question_active:
@@ -90,6 +110,28 @@ func load_question(file):
 	question_active = true
 
 
+func load_question_new():
+	question_num += 1
+	if question_num > 20:
+		end_game()
+		return
+		
+	timer = 30.0
+	answer_label.text = ""
+	var num_questions = questions.size()
+	rng.randomize()
+	var random_num = rng.randi_range(0, num_questions - 1)
+	
+	question_label.text = questions[random_num]
+	question = questions[random_num]
+	correct_answer = answers[random_num]
+	
+	question_active = true
+	
+	questions.remove(random_num)
+	answers.remove(random_num)
+
+
 func check_answer(selected_answer, correct_answer):
 	print(str(selected_answer))
 	if question_active:
@@ -99,13 +141,15 @@ func check_answer(selected_answer, correct_answer):
 			score += 10
 			update_score()
 			yield(get_tree().create_timer(5.0), "timeout") # Delay
-			load_question(question_pack)
+			#load_question(question_pack)
+			load_question_new()
 		else:
 			answer_label.text = "Incorrect answer -5 points"
 			score -= 5
 			update_score()
 			yield(get_tree().create_timer(5.0), "timeout")
-			load_question(question_pack)
+			#load_question(question_pack)
+			load_question_new()
 
 
 func skip_question():
@@ -113,7 +157,8 @@ func skip_question():
 		question_active = false
 		answer_label.text = "Question skipped"
 		yield(get_tree().create_timer(5.0), "timeout")
-		load_question(question_pack)
+		#load_question(question_pack)
+		load_question_new()
 
 
 func end_game():
