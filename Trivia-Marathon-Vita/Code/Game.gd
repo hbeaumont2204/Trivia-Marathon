@@ -10,7 +10,18 @@ var buttons = ""
 var question_pack = ""
 var correct_answer = ""
 var file_path = "res://Assets/quiz_pack_2.csv"
-var file_paths = ["res://Assets/quiz_pack_2.csv", "res://Assets/quiz_pack_1.csv"]
+var file_paths = ["res://Assets/quiz_pack_2.csv", "res://Assets/quiz_pack_1.csv"] # 
+var files = [] #
+var question_num = 1 # 
+var questions = []
+var options_1 = []
+var options_2 = []
+var options_3 = []
+var options_4 = []
+var answers = []
+var rng = RandomNumberGenerator.new()
+
+
 var questionActive = true
 
 var score = 10 # Player Score
@@ -28,11 +39,30 @@ func _ready() -> void:
 	#file_path = "res://Assets/quiz_test.csv" # Test
 	
 	buttons = button_container.get_children()
-	question_pack = load_question_pack(file_path)
+	#question_pack = load_question_pack(file_path)
+	for pack in file_paths:
+		question_pack = load_question_pack(pack)
+		if question_pack:
+			files.append(question_pack)
 	#question_pack.open(file_path, File.READ)
-	if question_pack:
-		load_question(question_pack)
-		update_score()
+
+	#if question_pack:
+	#	load_question(question_pack)
+	#	update_score()
+	
+	for file in files:
+		while !(file.eof_reached()):
+			var current_line = file.get_csv_line()
+			if current_line.size() >= 6 or current_line[0] != "":
+				questions.append(current_line[0])
+				options_1.append(current_line[1])
+				options_2.append(current_line[2])
+				options_3.append(current_line[3])
+				options_4.append(current_line[4])
+				answers.append(current_line[5])
+	
+	load_question_new()
+	update_score()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -80,6 +110,40 @@ func load_question_pack(file_path: String):
 	#	return
 	return file
 
+# NEW
+# Load question from index
+func load_question_new():
+	question_num += 1
+	if question_num > 20:
+		end_game()
+	
+	timer = 30.0
+	answerLabel.text = ""
+	var num_questions = questions.size()
+	rng.randomize()
+	var random_num = rng.randi_range(0, num_questions)
+	
+	label.text = questions[random_num]
+	question = questions[random_num]
+	option_1 = options_1[random_num]
+	option_2 = options_2[random_num]
+	option_3 = options_3[random_num]
+	option_4 = options_4[random_num]
+	correct_answer = answers[random_num]
+	questionActive = true
+	
+	buttons[0].text = option_1
+	buttons[1].text = option_2
+	buttons[2].text = option_3
+	buttons[3].text = option_4
+	
+	questions.remove(random_num)
+	options_1.remove(random_num)
+	options_2.remove(random_num)
+	options_3.remove(random_num)
+	options_4.remove(random_num)
+	answers.remove(random_num)
+	
 
 func load_question(file):
 	if file.eof_reached() || score < 0: # End game when out of questions or score goes negative
@@ -117,13 +181,15 @@ func check_answer(selected_answer,correct_answer):
 			score += 10
 			update_score()
 			yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
-			load_question(question_pack)
+			#load_question(question_pack)
+			load_question_new()
 		else:
 			answerLabel.text = "Incorrect answer -5 points"
 			score -= 5
 			update_score()
 			yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
-			load_question(question_pack)
+			#load_question(question_pack)
+			load_question_new()
 
 
 func skip_question():
@@ -131,13 +197,15 @@ func skip_question():
 		questionActive = false
 		answerLabel.text = "Skipped"
 		yield(get_tree().create_timer(5.0), "timeout") # Delay between questions
-		load_question(question_pack)
+		#load_question(question_pack)
+		load_question_new()
 	
 func no_answer():
 	questionActive = false
 	answerLabel.text = "No answer given"
 	yield(get_tree().create_timer(5.0), "timeout") # Delay
-	load_question(question_pack)
+	#load_question(question_pack)
+	load_question_new()
 	
 func end_game():
 	if question_pack:

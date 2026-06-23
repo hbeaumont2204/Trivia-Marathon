@@ -6,6 +6,11 @@ var buttons = ""
 var question_pack = ""
 var is_true = ""
 var file_path = "res://Assets/quiz_history_tf.csv"
+
+# NEW
+var question_number = 1
+var file_paths = ["res://Assets/quiz_history_tf.csv", "res://Assets/tf_pack_1.csv"]
+
 var correct_answer = ""
 var question_active = true
 
