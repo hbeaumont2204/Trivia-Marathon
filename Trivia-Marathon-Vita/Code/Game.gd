@@ -121,7 +121,7 @@ func load_question_new():
 	answerLabel.text = ""
 	var num_questions = questions.size()
 	rng.randomize()
-	var random_num = rng.randi_range(0, num_questions)
+	var random_num = rng.randi_range(0, num_questions - 1)
 	
 	label.text = questions[random_num]
 	question = questions[random_num]
