@@ -17,7 +17,7 @@ anchor_bottom = 1.0
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
-margin_top = -184.0
+margin_top = -200.0
 margin_right = 104.0
 margin_bottom = -116.0
 rect_scale = Vector2( 4, 2 )
@@ -33,10 +33,16 @@ margin_right = 80.0
 margin_bottom = 44.0
 text = "Options"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
 margin_top = 48.0
 margin_right = 80.0
 margin_bottom = 68.0
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 80.0
+margin_bottom = 92.0
 text = "Exit Game"
 
 [node name="ScoreContainer" type="VBoxContainer" parent="."]
@@ -103,5 +109,6 @@ align = 1
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_OptionButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="OptionsContainer/GameModeButton" to="." method="_on_GameModeButton_pressed"]
