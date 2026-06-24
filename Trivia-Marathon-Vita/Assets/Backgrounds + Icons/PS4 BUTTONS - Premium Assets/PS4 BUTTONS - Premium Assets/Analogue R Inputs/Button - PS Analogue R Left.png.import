@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+path="res://.import/Button - PS Analogue R Left.png-34629af029015050e929a4bfc1e34456.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
+source_file="res://Assets/Backgrounds + Icons/PS4 BUTTONS - Premium Assets/PS4 BUTTONS - Premium Assets/Analogue R Inputs/Button - PS Analogue R Left.png"
+dest_files=[ "res://.import/Button - PS Analogue R Left.png-34629af029015050e929a4bfc1e34456.stex" ]
 
 [params]
 
