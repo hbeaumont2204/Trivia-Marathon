@@ -61,7 +61,6 @@ margin_bottom = 244.0
 alignment = 1
 
 [node name="HighScore" type="Label" parent="ScoreContainer"]
-modulate = Color( 0, 0, 0, 1 )
 material = SubResource( 1 )
 margin_top = 54.0
 margin_right = 376.0
@@ -69,7 +68,6 @@ margin_bottom = 68.0
 text = "High Score:"
 
 [node name="PreviousScore" type="Label" parent="ScoreContainer"]
-modulate = Color( 0, 0, 0, 1 )
 material = SubResource( 1 )
 margin_top = 72.0
 margin_right = 376.0
@@ -84,7 +82,6 @@ margin_right = 819.0
 margin_bottom = 249.0
 
 [node name="HighScore" type="Label" parent="OptionsContainer"]
-modulate = Color( 0, 0, 0, 1 )
 material = SubResource( 1 )
 margin_right = 376.0
 margin_bottom = 14.0
@@ -107,7 +104,6 @@ text = "True or False"
 
 [node name="Label2" type="Label" parent="OptionsContainer"]
 visible = false
-modulate = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 margin_top = 94.0
 margin_right = 376.0
 margin_bottom = 142.0
@@ -123,7 +119,6 @@ margin_right = 819.0
 margin_bottom = 249.0
 
 [node name="CreditsLabel" type="Label" parent="CreditsContainer"]
-modulate = Color( 0, 0, 0, 1 )
 material = SubResource( 1 )
 margin_right = 376.0
 margin_bottom = 116.0
